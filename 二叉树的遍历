@@ -1,0 +1,37 @@
+在leetcode上刷题时，发现一个二叉树遍历很好的解法，记录一下。
+
+题目：给定一个二叉树，返回它的中序遍历
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        white,gray=0,1         
+        res=[]                
+        stack=[(white,root)]   
+        while stack:
+            color,node=stack.pop()   
+            if node is None:
+                continue
+            if color==white:                #遍历顺序不同可以调整下面三行代码
+                stack.append((white,node.right))
+                stack.append((gray,node))
+                stack.append((white,node.left))
+            else:
+                res.append(node.val)
+        return res
+        
+说明：所有未访问的结点状态为white，访问过的结点状态为gray，如果状态为gray，输出值
+
+如：前序遍历：
+...
+  if color==white:
+    stack.append((white,node.right))
+    stack.append((white,node.left))
+    stack.append((gray,node))
+...
