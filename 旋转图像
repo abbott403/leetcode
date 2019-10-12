@@ -1,0 +1,44 @@
+题目：给定一个 n × n 的二维矩阵表示一个图像，将图像顺时针旋转 90 度(原地修改)
+
+解法1：先上下调换再替换
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+      m=len(matrix)
+      st=0
+      end=m-1
+      while st<end:
+        matrix[st],mstrix[end]=matrix[end],matrix[st]
+      for i in range(m):
+        for j in range(i+1,m):
+          matrix[i][j],matrix[j][i]=matrix[j][i],matrix[i][j]
+          
+
+解法二：先外层旋转，再到内层，一层一层的旋转
+
+                   第0层         第1层     
+1  2  3  4       1  2  3  4   
+5  6  7  8       5        8      6  7
+9  10 11 12  =>  9        12     10 11 
+13 14 15 16      13 14 15 16   
+
+初始状态           第一次旋转          第二次旋转         第三次旋转
+1  2  3  4       13 2  3  1         13 9  3  1       13 9  5  1
+5        8   =>  5        8    =>   5        2   =>  14       2  => done
+9        12      9        12        15       12      15       3    
+13 14 15 16      16 14 15 4         16 14 8  4       16 12 8  4
+
+初始状态          第一次旋转          
+6  7      =>     10  6      =>    done
+10 11            11  7         
+
+n=len(matrix)
+m=(n+1)//2
+for k in range(m):
+  t=m-2*k-1                  #总结规律得出需要旋转的次数
+  for i in range(t):
+    temp=matrix[k][k+i]
+    matrix[k][k+i]=matrix[n-1-k-i][k]
+    matrix[n-1-k-i][k]=matrix[n-1-k][n-1-k-i]
+    matrix[n-1-k][n-1-k-i]=matrix[k+i][n-1-k]
+    matrix[k+i][n-1-k]=temp
