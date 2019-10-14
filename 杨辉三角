@@ -1,0 +1,15 @@
+给定一个非负整数 numRows，生成杨辉三角的前 numRows 行
+
+动态规划：
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        res=[]
+        for i in range(numRows):
+            temp=[0]*(i+1)
+            temp[0]=1
+            temp[-1]=1
+            if i>1:
+                for j in range(1,i):
+                    temp[j]=res[-1][j-1]+res[-1][j]
+            res.append(temp)
+        return res
