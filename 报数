@@ -1,0 +1,27 @@
+报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+
+给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。
+注意：整数顺序将表示为一个字符串。
+
+对题意的解释:下一项是对上一项的描述，如第二项的'11'是说第一项有1个1（11），第三项是说第二项有2个1（21），第四项是说第三项有1个2，1个1（1211）
+
+class Solution(object):
+    def countAndSay(self, n):
+      prev='1'
+      for i in range(1,n):
+        nex,num,count='',prev[0],1
+        for j in range(1,len(prev)):
+          if prev[j]==num:
+            count+=1
+          else:
+            nex=nex+str(count)+num
+            num=prev[j]
+            count=1
+        nex=nex+str(count)+num
+        prev=nex
+     return prev
