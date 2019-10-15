@@ -1,0 +1,21 @@
+给定一个整数数组，判断是否存在重复元素。
+如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。
+
+字典：
+class Solution(object):
+    def containsDuplicate(self, nums):
+      hasd={}
+        for i in nums:
+            hasd[i]=hasd.get(i,0)+1
+            if hasd[i]>1:
+                return True
+        return False
+        
+集合：
+class Solution(object):
+    def containsDuplicate(self, nums):
+      setnums=set(nums)
+      if len(setnums)==len(nums):
+        return False
+      else:
+        return True
