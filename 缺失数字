@@ -1,0 +1,26 @@
+给定一个包含 0, 1, 2, ..., n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。
+
+哈希表：
+class Solution:
+    def missingNumber(self, nums):
+      setnums=set(nums)
+      for i in range(len(nums)+1):
+        if i not in setnums:
+          return i
+          
+位运算：
+class Solution:
+    def missingNumber(self, nums):
+      missing=len(nums)
+      for i,num in enumerate(nums):
+        missing^=i^num
+      return missing
+
+数学运算：
+class Solution:
+    def missingNumber(self, nums):
+      n=len(nums)*(len(nums)+1)/2
+      res=0
+      for i in nums:
+        res+=i
+      return n-res
