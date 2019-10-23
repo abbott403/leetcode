@@ -1,0 +1,30 @@
+给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1
+
+class Solution(object):
+    def firstUniqChar(self, s):
+        if not s or len(s)==0:
+            return -1
+        hdict={}
+        res=[]
+        for i in s:
+            hdict[i]=hdict.get(i,0)+1
+        for k,v in hdict.items():
+            if v==1:
+                res.append(s.index(k))
+        if not res:
+            return -1
+        return min(res)
+ 
+ 
+利用OrderedDict，有序字典
+from collections import OrderedDict
+class Solution:
+     def firstUniqChar(self, s: str) -> int: 
+        temp = OrderedDict() 
+        for i in s: 
+            temp[i] = temp.get(i, 0) + 1 
+        for k, v in temp.items(): 
+            if int(v) <= 1: 
+                return s.index(k) 
+                break
+        return -1
