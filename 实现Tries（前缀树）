@@ -1,0 +1,36 @@
+实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+
+class Trie(object):
+
+    def __init__(self):
+        self.root={}
+
+    def insert(self, word):
+        node=self.root
+        for s in word:
+            if s in node.keys():
+                node=node[s]
+            else:
+                node[s]={}
+                node=node[s]
+        node['is_word']=True
+
+    def search(self, word):
+        node=self.root
+        for s in word:
+            if s in node:
+                node=node[s]
+            else:
+                return False
+        if 'is_word' in node.keys():
+            return True
+        return False
+
+    def startsWith(self, prefix):
+        node=self.root
+        for s in prefix:
+            if s in node.keys():
+                node=node[s]
+            else:
+                return False
+        return True
