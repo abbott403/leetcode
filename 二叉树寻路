@@ -1,0 +1,20 @@
+在一棵无限的二叉树上，每个节点都有两个子节点，树中的节点 逐行 依次按 “之” 字形进行标记。
+在奇数行（即，第一行、第三行、第五行……）中，按从左到右的顺序进行标记，而偶数行（即，第二行、第四行、第六行……）中，按从右到左的顺序进行标记。
+
+class Solution(object):
+    def pathInZigZagTree(self, label):
+        if label<1 or not label:
+            return None
+        
+        import math
+        currentlayer=int(math.log(label,2))+1
+        path=[]
+        path.append(label)
+        for i in range(currentlayer-1,0,-1): 
+            start=2**(i-1)
+            end=2**i-1
+            pre=label//2
+            parent=start+end-pre
+            path.append(parent)
+            label=parent
+        return path[::-1]
